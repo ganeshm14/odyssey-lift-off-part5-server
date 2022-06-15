@@ -7,11 +7,13 @@ const resolvers = {
 
     // get a single track by ID, for the track page
     track: (_, { id }, { dataSources }) => {
+     
       return dataSources.trackAPI.getTrack(id);
     },
 
     // get a single module by ID, for the module detail page
     module: (_, { id }, { dataSources }) => {
+      
       return dataSources.trackAPI.getModule(id);
     },
   },
@@ -36,11 +38,15 @@ const resolvers = {
       }
     },
   },
+  Module: {
+    durationInSeconds: ({ length }) => length,
+  },
   Track: {
+    durationInSeconds: ({ length }) => length,
     author: ({ authorId }, _, { dataSources }) => {
       return dataSources.trackAPI.getAuthor(authorId);
     },
-
+   
     modules: ({ id }, _, { dataSources }) => {
       return dataSources.trackAPI.getTrackModules(id);
     },
